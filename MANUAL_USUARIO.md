@@ -28,7 +28,7 @@
    | Server Name | `localhost` |
    | Admin Email | (tu correo o dejarlo por defecto) |
    | Apache HTTP Port | `80` |
-   | MySQL Root Password | **`admin`** ⚠️ MUY IMPORTANTE |
+   | MySQL Root Password | root |
 
    > ⚠️ **IMPORTANTE:** La contraseña de MySQL DEBE ser **`admin`** para que el proyecto funcione sin modificaciones. Si pones otra contraseña, tendrás que cambiarla en el archivo `includes/conexion.php`.
 
@@ -98,7 +98,7 @@
    ```
 2. Iniciar sesión con:
    - **Usuario:** `root`
-   - **Contraseña:** `admin`
+   - **Contraseña:** `la que definiste al instalar appserv`
 3. En el panel izquierdo, hacer clic en **"Nuevo"** (o "New") para crear una base de datos
 4. Escribir el nombre: **`Eq1Tienda`**
 5. En cotejamiento seleccionar: **`utf8_general_ci`**
