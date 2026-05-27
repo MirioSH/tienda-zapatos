@@ -30,7 +30,7 @@
    | Apache HTTP Port | `80` |
    | MySQL Root Password | root |
 
-   > ⚠️ **IMPORTANTE:** La contraseña de MySQL DEBE ser **`admin`** para que el proyecto funcione sin modificaciones. Si pones otra contraseña, tendrás que cambiarla en el archivo `includes/conexion.php`.
+   > ⚠️ **IMPORTANTE:** La contraseña de MySQL DEBE ser **`12345678`** para que el proyecto funcione sin modificaciones. Si pones otra contraseña, tendrás que cambiarla en el archivo `includes/conexion.php`.
 
 6. Marcar los componentes a instalar:
    - ✅ Apache HTTP Server
@@ -146,7 +146,7 @@ El archivo `includes/conexion.php` ya viene configurado para AppServ con:
 | Base de datos | `Eq1Tienda` |
 | Puerto | `3306` |
 
-> ⚠️ Si usaste una contraseña diferente a `admin` durante la instalación de AppServ, debes abrir el archivo `includes/conexion.php` y cambiar la línea que dice:
+> ⚠️ Si usaste una contraseña diferente a `12345678` durante la instalación de AppServ, debes abrir el archivo `includes/conexion.php` y cambiar la línea que dice:
 > ```php
 > $password = 'admin';
 > ```
