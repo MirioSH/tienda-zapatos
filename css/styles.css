@@ -4,7 +4,7 @@
    CSS tipo c: Para todas las páginas del sitio
    ============================================= */
 
-/* --- CSS Variables (Design Tokens from Stitch) --- */
+/* --- CSS Variables (Design Tokens) --- */
 :root {
   --surface: #121414;
   --surface-container: #1e2020;

@@ -260,7 +260,7 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
 | Proyecto | Tienda de Zapatos — VoltKicks |
 | Tecnologías | PHP, MySQL, HTML, CSS, JavaScript |
 | Servidor | AppServ (Apache + MySQL + PHP) |
-| Diseño | Generado con Stitch AI (Dark Mode Premium) |
+| Diseño | Personalizado (Dark Mode Premium) |
 
 ---
 
