@@ -15,9 +15,9 @@ if (isset($conexion) && !$conexion->connect_error) {
     if ($result->num_rows > 0) $producto = $result->fetch_assoc();
 }
 
-// Fallback
+// Si el producto no existe en la base de datos, cargar datos por defecto
 if (!$producto) {
-    $fallback = [
+    $productos_defecto = [
         1 => ['id'=>1,'nombre'=>'PHANTOM X-1','precio'=>3499,'imagen'=>'zapato1.png','categoria'=>'Running','descripcion'=>'Ingeniería de élite. Placas de propulsión con infusión de carbono y amortiguación de alta respuesta para un máximo retorno de energía.','tallas'=>'22,23,24,25,26,27,28'],
         2 => ['id'=>2,'nombre'=>'ZENITH COURT','precio'=>3299,'imagen'=>'zapato2.png','categoria'=>'Basketball','descripcion'=>'Domina la cancha con tecnología Zenith de soporte lateral avanzado y suela adherente de máxima tracción.','tallas'=>'23,24,25,26,27,28'],
         3 => ['id'=>3,'nombre'=>'VOLT NITRO','precio'=>2799,'imagen'=>'zapato3.png','categoria'=>'Lifestyle','descripcion'=>'Estilo urbano con rendimiento atlético. Malla ultraligera con costuras en naranja eléctrico.','tallas'=>'22,23,24,25,26,27'],
@@ -25,7 +25,7 @@ if (!$producto) {
         5 => ['id'=>5,'nombre'=>'APEX VELOCITY','precio'=>3599,'imagen'=>'zapato5.png','categoria'=>'Basketball','descripcion'=>'Basketball de élite. Naranja eléctrico audaz con texturas de malla y cuero.','tallas'=>'24,25,26,27,28'],
         6 => ['id'=>6,'nombre'=>'TITAN GRIP','precio'=>3199,'imagen'=>'zapato6.png','categoria'=>'Training','descripcion'=>'Cross-training de alta tecnología con diseño futurista.','tallas'=>'22,23,24,25,26,27,28'],
     ];
-    $producto = $fallback[$id] ?? $fallback[1];
+    $producto = $productos_defecto[$id] ?? $productos_defecto[1];
 }
 
 $titulo_pagina = $producto['nombre'];
@@ -103,6 +103,9 @@ include 'includes/header.php';
                         AGREGAR AL CARRITO
                     </button>
                     <a href="carrito.php" class="btn-secondary" style="flex:1;padding:18px;text-align:center;" id="btn-comprar-ahora">COMPRAR AHORA</a>
+                    <button class="btn-secondary" onclick="toggleFavorito(<?php echo $producto['id']; ?>,'<?php echo $producto['nombre']; ?>',<?php echo $producto['precio']; ?>,'<?php echo $producto['imagen']; ?>', event)" style="padding:18px; flex:0 0 60px; display:flex; align-items:center; justify-content:center;" title="Favoritos">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </button>
                 </div>
 
                 <!-- Especificaciones -->

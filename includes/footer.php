@@ -41,7 +41,7 @@
             </div>
             <div class="footer-bottom">
                 <p>© 2026 <?php echo $nombre_tienda ?? 'VOLTKICKS'; ?> — Equipo 1. Todos los derechos reservados.</p>
-                <p class="footer-creditos">Proyecto de Sitio Web 2026-2 | Diseño con Stitch AI</p>
+                <p class="footer-creditos">Proyecto de Sitio Web 2026-2 | Diseño Personalizado</p>
             </div>
         </div>
     </footer>

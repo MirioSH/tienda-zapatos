@@ -28,7 +28,7 @@
    | Server Name | `localhost` |
    | Admin Email | (tu correo o dejarlo por defecto) |
    | Apache HTTP Port | `80` |
-   | MySQL Root Password | root |
+   | MySQL Root Password | 12345678 |
 
    > ⚠️ **IMPORTANTE:** La contraseña de MySQL DEBE ser **`12345678`** para que el proyecto funcione sin modificaciones. Si pones otra contraseña, tendrás que cambiarla en el archivo `includes/conexion.php`.
 
@@ -121,7 +121,7 @@
    ```
    Inicio → AppServ → MySQL Command Line Client
    ```
-2. Ingresar la contraseña: `admin`
+2. Ingresar la contraseña: `12345678`
 3. Ejecutar:
    ```sql
    SOURCE C:/AppServ/www/tienda-zapatos/bd/esquema.sql;
@@ -142,13 +142,13 @@ El archivo `includes/conexion.php` ya viene configurado para AppServ con:
 |-----------|-------|
 | Host | `localhost` |
 | Usuario | `root` |
-| Contraseña | `admin` |
+| Contraseña | `12345678` |
 | Base de datos | `Eq1Tienda` |
 | Puerto | `3306` |
 
 > ⚠️ Si usaste una contraseña diferente a `12345678` durante la instalación de AppServ, debes abrir el archivo `includes/conexion.php` y cambiar la línea que dice:
 > ```php
-> $password = 'admin';
+> $password = '12345678';
 > ```
 > Por tu contraseña real.
 
@@ -185,6 +185,21 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
 
 ---
 
+## 🔐 CÓMO PROBAR EL INICIO DE SESIÓN
+
+Se ha configurado una cuenta de prueba para que puedas experimentar la función de autocompletado en el carrito de compras.
+
+1. Haz clic en **"INICIAR SESIÓN"** en el menú principal.
+2. Ingresa los siguientes datos:
+   - **Correo Electrónico:** `test@voltkicks.com`
+   - **Contraseña:** `password123`
+3. Al iniciar sesión, verás que el menú cambia y ahora muestra "CERRAR SESIÓN".
+4. Si ahora vas al carrito de compras, verás que tus datos personales y dirección se han llenado automáticamente.
+
+*(Nota: También puedes crear tu propia cuenta haciendo clic en "Regístrate aquí" en la pantalla de Iniciar Sesión).*
+
+---
+
 ## 🛒 CÓMO HACER UN PEDIDO (Prueba)
 
 1. Ir a **CATÁLOGO** (`http://localhost/tienda-zapatos/catalogo.php`)
@@ -192,7 +207,7 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
 3. Aparecerá una notificación naranja confirmando que se agregó
 4. Ir al **CARRITO** (hacer clic en el ícono de bolsa arriba a la derecha)
 5. Llenar el formulario con datos de prueba:
-   - **Nombre:** Juan Pérez
+   - **Nombre:** Juan Pérez (O puedes iniciar sesión y se llenará solo)
    - **Email:** juan@test.com
    - **Teléfono:** 5512345678
    - **Dirección:** Av. Reforma 100
@@ -200,6 +215,11 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
    - **C.P.:** 06600
    - **Estado:** Seleccionar → CDMX
    - **Método de envío:** Seleccionar → Estándar
+   - **Método de pago (Tarjeta):** Puedes usar datos falsos para la prueba:
+     - *Nombre:* Usuario de Prueba
+     - *Número:* 4111 1111 1111 1111
+     - *Expiración:* 12/30
+     - *CVV:* 123
    - **Acepto términos:** ✅ Marcar
 6. Hacer clic en **"REALIZAR PEDIDO"**
 7. Debe aparecer la confirmación con el número de pedido
@@ -247,8 +267,9 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
 
 | Recurso | Usuario | Contraseña |
 |---------|---------|------------|
-| MySQL / phpMyAdmin | `root` | `admin` |
+| MySQL / phpMyAdmin | `root` | `12345678` |
 | Base de datos | — | `Eq1Tienda` |
+| Cuenta de Cliente | `test@voltkicks.com` | `password123` |
 
 ---
 
@@ -260,7 +281,7 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
 | Proyecto | Tienda de Zapatos — VoltKicks |
 | Tecnologías | PHP, MySQL, HTML, CSS, JavaScript |
 | Servidor | AppServ (Apache + MySQL + PHP) |
-| Diseño | Generado con Stitch AI (Dark Mode Premium) |
+| Diseño | Personalizado (Dark Mode Premium) |
 
 ---
 

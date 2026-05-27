@@ -80,9 +80,12 @@ if (empty($productos)) {
                             <div class="product-card-category"><?php echo $p['categoria']; ?></div>
                             <div class="product-card-name"><?php echo $p['nombre']; ?></div>
                             <div class="product-card-price">$<?php echo number_format($p['precio'],2); ?> MXN</div>
-                            <div class="product-card-actions">
-                                <a href="producto.php?id=<?php echo $p['id']; ?>" class="btn-secondary">VER DETALLES</a>
-                                <button class="btn-primary" onclick="agregarAlCarrito(<?php echo $p['id']; ?>,'<?php echo $p['nombre']; ?>',<?php echo $p['precio']; ?>,'<?php echo $p['imagen']; ?>')">AGREGAR</button>
+                            <div class="product-card-actions" style="gap:8px;">
+                                <a href="producto.php?id=<?php echo $p['id']; ?>" class="btn-secondary" style="flex:1; text-align:center;">VER DETALLES</a>
+                                <button class="btn-primary" style="flex:1;" onclick="agregarAlCarrito(<?php echo $p['id']; ?>,'<?php echo $p['nombre']; ?>',<?php echo $p['precio']; ?>,'<?php echo $p['imagen']; ?>')">AGREGAR</button>
+                                <button class="btn-secondary" onclick="toggleFavorito(<?php echo $p['id']; ?>,'<?php echo $p['nombre']; ?>',<?php echo $p['precio']; ?>,'<?php echo $p['imagen']; ?>', event)" style="padding:10px; flex:0 0 40px; display:flex; align-items:center; justify-content:center;" title="Favoritos">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                </button>
                             </div>
                         </div>
                     </div>
