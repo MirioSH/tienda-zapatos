@@ -23,7 +23,7 @@
 // ============================================
 $host = 'localhost';
 $usuario = 'root';
-$password = 'admin';
+$password = '12345678';
 $basedatos = 'Eq1Tienda';
 $puerto = 3306;
 

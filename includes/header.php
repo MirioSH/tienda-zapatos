@@ -29,7 +29,12 @@ $nombre_tienda = 'VOLTKICKS';
     <!-- Cuadro de integrantes - Esquina superior izquierda -->
     <div id="equipo-info" class="equipo-badge">
         <span class="equipo-label">EQUIPO 1</span>
-        <span class="equipo-nombres">Integrantes del Equipo</span>
+        <span class="equipo-nombres">
+            Arroyo Llanes Miguel Alejandro<br>
+            González Frías Ana Paula<br>
+            Soto Huerta Gustavo Isaac<br>
+            Trujillo Salazar Wendy Jazmin
+        </span>
     </div>
 
     <!-- Navegación Glassmórfica -->
