@@ -1,8 +1,4 @@
-/* =============================================
-   VoltKicks - CSS Global (Identidad Corporativa)
-   Equipo 1 - Tienda de Zapatos
-   CSS tipo c: Para todas las páginas del sitio
-   ============================================= */
+/* Estilos base VoltKicks */
 
 /* --- CSS Variables (Design Tokens) --- */
 :root {
@@ -45,9 +41,9 @@ img { max-width: 100%; height: auto; display: block; }
 ul { list-style: none; }
 h1,h2,h3,h4,h5,h6 { font-family: var(--font-headline); text-transform: uppercase; letter-spacing: -0.02em; }
 
-/* --- Equipo Badge (esquina superior izquierda) --- */
+/* Integrantes */
 .equipo-badge {
-  position: fixed; top: 80px; left: 16px; z-index: 999;
+  position: fixed; bottom: 16px; left: 16px; z-index: 999;
   background: rgba(18,20,20,0.85); backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: var(--radius-md); padding: 8px 14px;
@@ -293,7 +289,7 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-headline); text-transform: uppercase
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .sidebar-layout { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; }
-  .equipo-badge { top: 70px; left: 8px; }
+  .equipo-badge { bottom: 16px; left: 8px; }
 }
 @media (max-width: 640px) {
   .nav-links { gap: 16px; }

@@ -172,13 +172,9 @@ function filtrarProductos() {
         const tallasRaw = card.dataset.tallas || "";
         const tallasDisponibles = tallasRaw.split(',').map(t => t.trim());
 
-        // --- DEPURACIÓN: Esto te dirá qué está fallando ---
         const cumpleCat = (catsSeleccionadas.length === 0 || catsSeleccionadas.includes(cat));
         const cumplePrecio = (precio <= precioMax);
         const cumpleTalla = (!tallaBuscada || tallasDisponibles.includes(tallaBuscada));
-
-        console.log(`Producto: ${card.querySelector('.product-card-name').innerText}`);
-        console.log(`- ¿Cat OK?: ${cumpleCat}, ¿Precio OK?: ${cumplePrecio}, ¿Talla OK?: ${cumpleTalla}`);
 
         if (cumpleCat && cumplePrecio && cumpleTalla) {
             card.style.display = 'block';
@@ -186,6 +182,30 @@ function filtrarProductos() {
             card.style.display = 'none';
         }
     });
+}
+
+function ordenarProductos() {
+    const grid = document.getElementById('grid-productos');
+    const selector = document.getElementById('sort-selector');
+    if (!grid || !selector) return;
+
+    const cards = Array.from(grid.querySelectorAll('.product-card'));
+    const order = selector.value;
+
+    cards.sort((a, b) => {
+        if (order === 'precio-asc' || order === 'precio-desc') {
+            const precioA = parseFloat(a.dataset.precio);
+            const precioB = parseFloat(b.dataset.precio);
+            return order === 'precio-asc' ? precioA - precioB : precioB - precioA;
+        } else if (order === 'nombre-asc') {
+            const nombreA = a.querySelector('.product-card-name').innerText.trim().toLowerCase();
+            const nombreB = b.querySelector('.product-card-name').innerText.trim().toLowerCase();
+            return nombreA.localeCompare(nombreB);
+        }
+        return 0;
+    });
+
+    cards.forEach(card => grid.appendChild(card));
 }
 
 // Animaciones de aparición suave al hacer scroll
