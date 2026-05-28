@@ -86,8 +86,4 @@ INSERT INTO detalle_pedido (pedido_id, producto_id, talla, cantidad, subtotal) V
 (2, 1, '24', 1, 2299.00),
 (3, 5, '27', 1, 1899.00),
 (3, 3, '25', 1, 4499.00);
-<<<<<<< Updated upstream
 
--- NOTA: Se eliminaron las tablas usuarios y favoritos de acuerdo a la reducción del proyecto
-=======
->>>>>>> Stashed changes
