@@ -47,9 +47,9 @@ if (empty($productos)) {
                 </div>
                 <div class="filter-section">
                     <h3>PRECIO</h3>
-                    <input type="range" min="1000" max="5000" value="5000" class="form-input" style="padding:8px;" id="filtro-precio">
+                    <input type="range" min="1000" max="5000" value="5000" class="form-input" style="padding:8px;" id="filtro-precio" oninput="document.getElementById('valor-precio-label').innerText = '$' + this.value; filtrarProductos()">
                     <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--on-surface-variant);margin-top:8px;">
-                        <span>$1,000</span><span>$5,000</span>
+                        <span>$1,000</span><span id="valor-precio-label">$5,000</span>
                     </div>
                 </div>
             </aside>
@@ -58,10 +58,10 @@ if (empty($productos)) {
             <div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
                     <p style="color:var(--on-surface-variant);font-size:14px;"><?php echo count($productos); ?> productos</p>
-                    <select class="form-select" style="width:auto;padding:10px 40px 10px 16px;" id="sort-selector">
-                        <option>Precio: Menor a Mayor</option>
-                        <option>Precio: Mayor a Menor</option>
-                        <option>Nombre: A-Z</option>
+                    <select class="form-select" style="width:auto;padding:10px 40px 10px 16px;" id="sort-selector" onchange="ordenarProductos()">
+                        <option value="precio-asc">Precio: Menor a Mayor</option>
+                        <option value="precio-desc">Precio: Mayor a Menor</option>
+                        <option value="nombre-asc">Nombre: A-Z</option>
                     </select>
                 </div>
                 <div class="product-grid" id="grid-productos">
