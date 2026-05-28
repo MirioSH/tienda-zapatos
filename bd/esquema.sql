@@ -108,3 +108,36 @@ INSERT INTO detalle_pedido (pedido_id, producto_id, talla, cantidad, subtotal) V
 (3, 3, '25', 1, 2399.00),
 (4, 3, '23', 1, 2799.00),
 (5, 5, '28', 1, 3599.00);
+
+-- =============================================
+-- Tabla: usuarios
+-- =============================================
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  telefono VARCHAR(20),
+  direccion TEXT,
+  ciudad VARCHAR(100),
+  codigo_postal VARCHAR(10),
+  estado VARCHAR(100),
+  fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Insertar usuario de prueba
+INSERT INTO usuarios (nombre, email, password, telefono, direccion, ciudad, codigo_postal, estado) VALUES
+('Usuario de Prueba', 'test@voltkicks.com', 'password123', '5512345678', 'Av. Reforma 100', 'CDMX', '06600', 'CDMX');
+
+-- =============================================
+-- Tabla: favoritos
+-- =============================================
+CREATE TABLE IF NOT EXISTS favoritos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  producto_id INT NOT NULL,
+  fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+  FOREIGN KEY (producto_id) REFERENCES productos(id),
+  UNIQUE KEY unique_favorito (usuario_id, producto_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
