@@ -44,24 +44,12 @@ if (empty($productos)) {
                     </div>
                 </div>
                 <div class="filter-section">
-                    <h3>TALLA</h3>
-                    <div class="size-grid">
-                        <?php for($t=22;$t<=28;$t++): ?>
-                        <div class="size-chip" id="talla-<?php echo $t; ?>"><?php echo $t; ?></div>
-                        <?php endfor; ?>
-                    </div>
                 </div>
                 <div class="filter-section">
                     <h3>PRECIO</h3>
-<<<<<<< Updated upstream
-                    <input type="range" min="2000" max="4000" value="4000" class="form-input" style="padding:8px;" id="filtro-precio">
-                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--on-surface-variant);margin-top:8px;">
-                        <span>$2,000</span><span>$4,000</span>
-=======
                     <input type="range" min="1000" max="5000" value="5000" class="form-input" style="padding:8px;" id="filtro-precio" oninput="document.getElementById('valor-precio-label').innerText = '$' + this.value; filtrarProductos()">
                     <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--on-surface-variant);margin-top:8px;">
                         <span>$1,000</span><span id="valor-precio-label">$5,000</span>
->>>>>>> Stashed changes
                     </div>
                 </div>
             </aside>
@@ -86,9 +74,9 @@ if (empty($productos)) {
                             <div class="product-card-category"><?php echo $p['categoria']; ?></div>
                             <div class="product-card-name"><?php echo $p['nombre']; ?></div>
                             <div class="product-card-price">$<?php echo number_format($p['precio'],2); ?> MXN</div>
-                            <div class="product-card-actions">
-                                <a href="producto.php?id=<?php echo $p['id']; ?>" class="btn-secondary">VER DETALLES</a>
-                                <button class="btn-primary" onclick="agregarAlCarrito(<?php echo $p['id']; ?>,'<?php echo $p['nombre']; ?>',<?php echo $p['precio']; ?>,'<?php echo $p['imagen']; ?>')">AGREGAR</button>
+                            <div class="product-card-actions" style="gap:8px;">
+                                <a href="producto.php?id=<?php echo $p['id']; ?>" class="btn-secondary" style="flex:1; text-align:center;">VER DETALLES</a>
+                                <button class="btn-primary" style="flex:1;" onclick="agregarAlCarrito(<?php echo $p['id']; ?>,'<?php echo $p['nombre']; ?>',<?php echo $p['precio']; ?>,'<?php echo $p['imagen']; ?>')">AGREGAR</button>
                             </div>
                         </div>
                     </div>

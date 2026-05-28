@@ -4,9 +4,7 @@
  * Incluye: Carrito (sessionStorage), animaciones, interactividad
  */
 
-// ============================================
-// CARRITO DE COMPRAS (Client-side)
-// ============================================
+// Carrito de compras (sessionStorage)
 const Carrito = {
   items: JSON.parse(sessionStorage.getItem('voltkicks_carrito') || '[]'),
 
@@ -71,9 +69,7 @@ const Carrito = {
   vaciar() { this.items = []; this.guardar(); }
 };
 
-// ============================================
-// SELECTOR DE TALLA
-// ============================================
+// Selector de talla en la vista de producto
 function initSizeSelector() {
   document.querySelectorAll('.size-chip').forEach(chip => {
     chip.addEventListener('click', function() {
@@ -83,17 +79,13 @@ function initSizeSelector() {
   });
 }
 
-// ============================================
-// AGREGAR AL CARRITO - Catálogo
-// ============================================
+// Agregar al carrito desde el catálogo
 function agregarAlCarrito(id, nombre, precio, imagen) {
   const tallaSeleccionada = '25'; // Default
   Carrito.agregar({ id, nombre, precio: parseFloat(precio), imagen, talla: tallaSeleccionada });
 }
 
-// ============================================
-// PERSONALIZACIÓN DE PRODUCTO (Detalle)
-// ============================================
+// Controles de cantidad y detalles de producto
 function initProductoDetalle() {
   const qtyDisplay = document.getElementById('qty-valor');
   const btnMenos = document.getElementById('qty-menos');
@@ -112,9 +104,7 @@ function initProductoDetalle() {
   });
 }
 
-// ============================================
-// RENDERIZAR CARRITO EN PÁGINA
-// ============================================
+// Renderizar productos del carrito en la interfaz
 function renderCarrito() {
   const container = document.getElementById('cart-items');
   if (!container) return;
@@ -166,23 +156,8 @@ function renderCarrito() {
 function actualizarQty(i, delta) { Carrito.actualizarCantidad(i, delta); renderCarrito(); }
 function eliminarItem(i) { Carrito.eliminar(i); renderCarrito(); }
 
-// ============================================
-// FILTRO DE CATÁLOGO
-// ============================================
+// Filtros en la vista del catálogo
 function filtrarProductos() {
-<<<<<<< Updated upstream
-  const cats = Array.from(document.querySelectorAll('.filter-cat:checked')).map(c => c.value);
-  const cards = document.querySelectorAll('.product-card');
-  cards.forEach(card => {
-    const cat = card.dataset.categoria;
-    card.style.display = (cats.length === 0 || cats.includes(cat)) ? '' : 'none';
-  });
-}
-
-// ============================================
-// ANIMACIONES DE SCROLL (Intersection Observer)
-// ============================================
-=======
     const precioMax = parseFloat(document.getElementById('filtro-precio').value);
     const catsSeleccionadas = Array.from(document.querySelectorAll('.filter-cat:checked')).map(c => c.value);
     const chipSeleccionado = document.querySelector('.size-chip.selected');
@@ -234,7 +209,6 @@ function ordenarProductos() {
 }
 
 // Animaciones de aparición suave al hacer scroll
->>>>>>> Stashed changes
 function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -257,9 +231,7 @@ style.textContent = `.visible { opacity: 1 !important; transform: translateY(0) 
 @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
 document.head.appendChild(style);
 
-// ============================================
-// VALIDACIÓN DE FORMULARIO
-// ============================================
+// Validación de formulario y datos del pedido
 function validarPedido(event) {
   event.preventDefault();
   const form = event.target;
@@ -297,11 +269,10 @@ function validarPedido(event) {
   return true;
 }
 
-// ============================================
-// INICIALIZACIÓN
-// ============================================
+// Inicialización general de la página
 document.addEventListener('DOMContentLoaded', () => {
   Carrito.actualizarContador();
+  actualizarContadorFavoritos();
   initSizeSelector();
   initProductoDetalle();
   initScrollAnimations();
@@ -312,3 +283,5 @@ document.addEventListener('DOMContentLoaded', () => {
     r.addEventListener('change', renderCarrito);
   });
 });
+
+
