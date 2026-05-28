@@ -1,11 +1,5 @@
 <?php
-/**
- * VoltKicks - Header reutilizable
- * Incluye: nav glassmórfico + cuadro de integrantes
- * Variable $pagina_activa determina el link activo
- */
 if (!isset($pagina_activa)) $pagina_activa = 'inicio';
-// Nombre de la tienda - CAMBIAR AQUÍ si tu equipo decide otro nombre
 $nombre_tienda = 'VOLTKICKS';
 ?>
 <!DOCTYPE html>
@@ -19,25 +13,32 @@ $nombre_tienda = 'VOLTKICKS';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <!-- CSS específico de página (CSS tipo b: Específicos para una página) -->
+    <!-- CSS -->
     <?php if (isset($css_pagina)): ?>
     <style><?php echo $css_pagina; ?></style>
     <?php endif; ?>
 </head>
 <body>
 
-    <!-- Cuadro de integrantes - Esquina superior izquierda -->
+    <!-- Integrantes -->
     <div id="equipo-info" class="equipo-badge">
         <span class="equipo-label">EQUIPO 1</span>
         <span class="equipo-nombres">
+<<<<<<< Updated upstream
             Arroyo Llanes Miguel Alejandro<br>
             González Frías Ana Paula<br>
             Soto Huerta Gustavo Isaac<br>
             Trujillo Salazar Wendy Jazmin
+=======
+            • Arroyo Llanes Miguel Alejandro<br>
+            • González Frías Ana Paula<br>
+            • Soto Huerta Gustavo Isaac<br>
+            • Trujillo Salazar Wendy Jazmin
+>>>>>>> Stashed changes
         </span>
     </div>
 
-    <!-- Navegación Glassmórfica -->
+    <!-- Navegación -->
     <nav id="nav-principal" class="nav-glass">
         <div class="nav-container">
             <a href="index.php" class="nav-logo" id="logo-link">

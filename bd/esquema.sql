@@ -5,8 +5,11 @@
 -- MySQL dump compatible con AppServ y MariaDB
 -- =============================================
 
+-- Eliminar base de datos si ya existe para empezar de cero
+DROP DATABASE IF EXISTS Eq1Tienda;
+
 -- Crear base de datos
-CREATE DATABASE IF NOT EXISTS Eq1Tienda
+CREATE DATABASE Eq1Tienda
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 

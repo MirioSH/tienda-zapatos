@@ -170,6 +170,7 @@ function eliminarItem(i) { Carrito.eliminar(i); renderCarrito(); }
 // FILTRO DE CATÁLOGO
 // ============================================
 function filtrarProductos() {
+<<<<<<< Updated upstream
   const cats = Array.from(document.querySelectorAll('.filter-cat:checked')).map(c => c.value);
   const cards = document.querySelectorAll('.product-card');
   cards.forEach(card => {
@@ -181,6 +182,59 @@ function filtrarProductos() {
 // ============================================
 // ANIMACIONES DE SCROLL (Intersection Observer)
 // ============================================
+=======
+    const precioMax = parseFloat(document.getElementById('filtro-precio').value);
+    const catsSeleccionadas = Array.from(document.querySelectorAll('.filter-cat:checked')).map(c => c.value);
+    const chipSeleccionado = document.querySelector('.size-chip.selected');
+    const tallaBuscada = chipSeleccionado ? chipSeleccionado.innerText.trim() : null;
+
+    const tarjetas = document.querySelectorAll('.product-card');
+
+    tarjetas.forEach(card => {
+        const precio = parseFloat(card.dataset.precio);
+        const cat = card.dataset.categoria;
+        // Obtenemos tallas del atributo, si no existe o está vacío, creamos un array vacío
+        const tallasRaw = card.dataset.tallas || "";
+        const tallasDisponibles = tallasRaw.split(',').map(t => t.trim());
+
+        const cumpleCat = (catsSeleccionadas.length === 0 || catsSeleccionadas.includes(cat));
+        const cumplePrecio = (precio <= precioMax);
+        const cumpleTalla = (!tallaBuscada || tallasDisponibles.includes(tallaBuscada));
+
+        if (cumpleCat && cumplePrecio && cumpleTalla) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function ordenarProductos() {
+    const grid = document.getElementById('grid-productos');
+    const selector = document.getElementById('sort-selector');
+    if (!grid || !selector) return;
+
+    const cards = Array.from(grid.querySelectorAll('.product-card'));
+    const order = selector.value;
+
+    cards.sort((a, b) => {
+        if (order === 'precio-asc' || order === 'precio-desc') {
+            const precioA = parseFloat(a.dataset.precio);
+            const precioB = parseFloat(b.dataset.precio);
+            return order === 'precio-asc' ? precioA - precioB : precioB - precioA;
+        } else if (order === 'nombre-asc') {
+            const nombreA = a.querySelector('.product-card-name').innerText.trim().toLowerCase();
+            const nombreB = b.querySelector('.product-card-name').innerText.trim().toLowerCase();
+            return nombreA.localeCompare(nombreB);
+        }
+        return 0;
+    });
+
+    cards.forEach(card => grid.appendChild(card));
+}
+
+// Animaciones de aparición suave al hacer scroll
+>>>>>>> Stashed changes
 function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

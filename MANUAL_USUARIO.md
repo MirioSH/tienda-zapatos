@@ -1,5 +1,12 @@
 # 📘 MANUAL DE USUARIO — VoltKicks
 ## Tienda de Zapatos Deportivos | Equipo 1
+
+### 👥 Integrantes del Equipo:
+* **Arroyo Llanes Miguel Alejandro**
+* **González Frías Ana Paula**
+* **Soto Huerta Gustavo Isaac**
+* **Trujillo Salazar Wendy Jazmin**
+
 ### Guía paso a paso para ejecutar el proyecto con AppServ (Windows)
 
 ---
@@ -201,7 +208,12 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
    - **Estado:** Seleccionar → CDMX
    - **Método de envío:** Seleccionar → Estándar
    - **Acepto términos:** ✅ Marcar
-6. Hacer clic en **"REALIZAR PEDIDO"**
+6. En la sección de **TARJETA DE CRÉDITO / DÉBITO**, ingresa estos datos de prueba:
+   - **Número de tarjeta:** `4111 1111 1111 1111`
+   - **Nombre en la tarjeta:** `Usuario de Prueba`
+   - **Fecha de expiración:** `12/28`
+   - **CVV:** `123`
+7. Hacer clic en **"REALIZAR PEDIDO"**
 7. Debe aparecer la confirmación con el número de pedido
 8. Verificar en **REPORTES** que el pedido aparece en la tabla
 
@@ -249,6 +261,7 @@ INICIO → CATÁLOGO → VER DETALLES → AGREGAR AL CARRITO → CARRITO → LLE
 |---------|---------|------------|
 | MySQL / phpMyAdmin | `root` | `admin` |
 | Base de datos | — | `Eq1Tienda` |
+| Cuenta de Prueba (Cliente) | `test@voltkicks.com` | `password123` |
 
 ---
 
