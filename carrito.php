@@ -40,6 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre_cliente'])) {
 }
 
 include 'includes/header.php';
+
+$usuario_nombre = $_SESSION['usuario_nombre'] ?? '';
+$usuario_email = $_SESSION['usuario_email'] ?? '';
+$usuario_telefono = $_SESSION['usuario_telefono'] ?? '';
+$usuario_direccion = $_SESSION['usuario_direccion'] ?? '';
+$usuario_ciudad = $_SESSION['usuario_ciudad'] ?? '';
+$usuario_cp = $_SESSION['usuario_cp'] ?? '';
+$usuario_estado = $_SESSION['usuario_estado'] ?? '';
 ?>
 
 <?php if ($pedido_exitoso): ?>
@@ -74,16 +82,16 @@ include 'includes/header.php';
                     <h3 style="font-size:14px;color:var(--primary);margin-bottom:16px;letter-spacing:0.08em;">DATOS PERSONALES</h3>
                     <div class="form-group">
                         <label class="form-label" for="nombre_cliente">NOMBRE COMPLETO</label>
-                        <input type="text" class="form-input" id="nombre_cliente" name="nombre_cliente" required placeholder="Tu nombre completo">
+                        <input type="text" class="form-input" id="nombre_cliente" name="nombre_cliente" required placeholder="Tu nombre completo" value="<?php echo htmlspecialchars($usuario_nombre); ?>">
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                         <div class="form-group">
                             <label class="form-label" for="email">EMAIL</label>
-                            <input type="email" class="form-input" id="email" name="email" required placeholder="tu@email.com">
+                            <input type="email" class="form-input" id="email" name="email" required placeholder="tu@email.com" value="<?php echo htmlspecialchars($usuario_email); ?>">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="telefono">TELÉFONO</label>
-                            <input type="tel" class="form-input" id="telefono" name="telefono" placeholder="55 1234 5678">
+                            <input type="tel" class="form-input" id="telefono" name="telefono" placeholder="55 1234 5678" value="<?php echo htmlspecialchars($usuario_telefono); ?>">
                         </div>
                     </div>
 
@@ -91,27 +99,52 @@ include 'includes/header.php';
                     <h3 style="font-size:14px;color:var(--primary);margin:24px 0 16px;letter-spacing:0.08em;">DIRECCIÓN DE ENVÍO</h3>
                     <div class="form-group">
                         <label class="form-label" for="direccion">DIRECCIÓN</label>
-                        <input type="text" class="form-input" id="direccion" name="direccion" required placeholder="Calle, número, colonia">
+                        <input type="text" class="form-input" id="direccion" name="direccion" required placeholder="Calle, número, colonia" value="<?php echo htmlspecialchars($usuario_direccion); ?>">
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
                         <div class="form-group">
                             <label class="form-label" for="ciudad">CIUDAD</label>
-                            <input type="text" class="form-input" id="ciudad" name="ciudad" placeholder="Ciudad">
+                            <input type="text" class="form-input" id="ciudad" name="ciudad" placeholder="Ciudad" value="<?php echo htmlspecialchars($usuario_ciudad); ?>">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="codigo_postal">C.P.</label>
-                            <input type="text" class="form-input" id="codigo_postal" name="codigo_postal" placeholder="06600" maxlength="5">
+                            <input type="text" class="form-input" id="codigo_postal" name="codigo_postal" placeholder="06600" maxlength="5" value="<?php echo htmlspecialchars($usuario_cp); ?>">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="estado_select">ESTADO</label>
                             <select class="form-select" id="estado_select" name="estado_select">
                                 <option value="">Selecciona...</option>
-                                <option>CDMX</option><option>Aguascalientes</option><option>Baja California</option>
-                                <option>Chihuahua</option><option>Guanajuato</option><option>Jalisco</option>
-                                <option>Estado de México</option><option>Monterrey</option><option>Nuevo León</option>
-                                <option>Oaxaca</option><option>Puebla</option><option>Querétaro</option>
-                                <option>Quintana Roo</option><option>Sonora</option><option>Yucatán</option>
+                                <?php
+                                $estados = ['CDMX','Aguascalientes','Baja California','Chihuahua','Guanajuato','Jalisco','Estado de México','Monterrey','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','Sonora','Yucatán'];
+                                foreach ($estados as $est) {
+                                    $sel = ($usuario_estado === $est) ? 'selected' : '';
+                                    echo "<option value=\"$est\" $sel>$est</option>";
+                                }
+                                ?>
                             </select>
+                        </div>
+                    </div>
+
+                    <!-- Método de Pago (Tarjeta Simulada) -->
+                    <h3 style="font-size:14px;color:var(--primary);margin:24px 0 16px;letter-spacing:0.08em;">MÉTODO DE PAGO (TARJETA)</h3>
+                    <div style="background: rgba(255,255,255,0.03); padding: 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="form-group">
+                            <label class="form-label" for="tarjeta_nombre">NOMBRE EN LA TARJETA</label>
+                            <input type="text" class="form-input" id="tarjeta_nombre" placeholder="Nombre como aparece en la tarjeta" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="tarjeta_numero">NÚMERO DE TARJETA</label>
+                            <input type="text" class="form-input" id="tarjeta_numero" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                            <div class="form-group">
+                                <label class="form-label" for="tarjeta_exp">EXPIRACIÓN</label>
+                                <input type="text" class="form-input" id="tarjeta_exp" placeholder="MM/AA" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="tarjeta_cvv">CVV</label>
+                                <input type="text" class="form-input" id="tarjeta_cvv" placeholder="123" maxlength="4" required>
+                            </div>
                         </div>
                     </div>
 

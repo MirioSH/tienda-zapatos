@@ -38,7 +38,7 @@ if (isset($conexion) && !$conexion->connect_error) {
     if (!empty($top_productos)) $mejor_producto = $top_productos[0]['nombre'];
 }
 
-// Fallback
+// Datos estáticos por si la base de datos está vacía
 if (empty($pedidos)) {
     $total_ventas = 124500; $total_pedidos = 48; $promedio = 2593.75;
     $pedidos = [
