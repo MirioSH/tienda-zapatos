@@ -4,9 +4,7 @@
  * Incluye: Carrito (sessionStorage), animaciones, interactividad
  */
 
-// ============================================
-// CARRITO DE COMPRAS (Client-side)
-// ============================================
+// Carrito de compras (sessionStorage)
 const Carrito = {
   items: JSON.parse(sessionStorage.getItem('voltkicks_carrito') || '[]'),
 
@@ -71,9 +69,7 @@ const Carrito = {
   vaciar() { this.items = []; this.guardar(); }
 };
 
-// ============================================
-// SELECTOR DE TALLA
-// ============================================
+// Selector de talla en la vista de producto
 function initSizeSelector() {
   document.querySelectorAll('.size-chip').forEach(chip => {
     chip.addEventListener('click', function() {
@@ -83,17 +79,13 @@ function initSizeSelector() {
   });
 }
 
-// ============================================
-// AGREGAR AL CARRITO - Catálogo
-// ============================================
+// Agregar al carrito desde el catálogo
 function agregarAlCarrito(id, nombre, precio, imagen) {
   const tallaSeleccionada = '25'; // Default
   Carrito.agregar({ id, nombre, precio: parseFloat(precio), imagen, talla: tallaSeleccionada });
 }
 
-// ============================================
-// PERSONALIZACIÓN DE PRODUCTO (Detalle)
-// ============================================
+// Controles de cantidad y detalles de producto
 function initProductoDetalle() {
   const qtyDisplay = document.getElementById('qty-valor');
   const btnMenos = document.getElementById('qty-menos');
@@ -112,9 +104,7 @@ function initProductoDetalle() {
   });
 }
 
-// ============================================
-// RENDERIZAR CARRITO EN PÁGINA
-// ============================================
+// Renderizar productos del carrito en la interfaz
 function renderCarrito() {
   const container = document.getElementById('cart-items');
   if (!container) return;
@@ -166,21 +156,39 @@ function renderCarrito() {
 function actualizarQty(i, delta) { Carrito.actualizarCantidad(i, delta); renderCarrito(); }
 function eliminarItem(i) { Carrito.eliminar(i); renderCarrito(); }
 
-// ============================================
-// FILTRO DE CATÁLOGO
-// ============================================
+// Filtros en la vista del catálogo
 function filtrarProductos() {
-  const cats = Array.from(document.querySelectorAll('.filter-cat:checked')).map(c => c.value);
-  const cards = document.querySelectorAll('.product-card');
-  cards.forEach(card => {
-    const cat = card.dataset.categoria;
-    card.style.display = (cats.length === 0 || cats.includes(cat)) ? '' : 'none';
-  });
+    const precioMax = parseFloat(document.getElementById('filtro-precio').value);
+    const catsSeleccionadas = Array.from(document.querySelectorAll('.filter-cat:checked')).map(c => c.value);
+    const chipSeleccionado = document.querySelector('.size-chip.selected');
+    const tallaBuscada = chipSeleccionado ? chipSeleccionado.innerText.trim() : null;
+
+    const tarjetas = document.querySelectorAll('.product-card');
+
+    tarjetas.forEach(card => {
+        const precio = parseFloat(card.dataset.precio);
+        const cat = card.dataset.categoria;
+        // Obtenemos tallas del atributo, si no existe o está vacío, creamos un array vacío
+        const tallasRaw = card.dataset.tallas || "";
+        const tallasDisponibles = tallasRaw.split(',').map(t => t.trim());
+
+        // --- DEPURACIÓN: Esto te dirá qué está fallando ---
+        const cumpleCat = (catsSeleccionadas.length === 0 || catsSeleccionadas.includes(cat));
+        const cumplePrecio = (precio <= precioMax);
+        const cumpleTalla = (!tallaBuscada || tallasDisponibles.includes(tallaBuscada));
+
+        console.log(`Producto: ${card.querySelector('.product-card-name').innerText}`);
+        console.log(`- ¿Cat OK?: ${cumpleCat}, ¿Precio OK?: ${cumplePrecio}, ¿Talla OK?: ${cumpleTalla}`);
+
+        if (cumpleCat && cumplePrecio && cumpleTalla) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 }
 
-// ============================================
-// ANIMACIONES DE SCROLL (Intersection Observer)
-// ============================================
+// Animaciones de aparición suave al hacer scroll
 function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -203,9 +211,7 @@ style.textContent = `.visible { opacity: 1 !important; transform: translateY(0) 
 @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
 document.head.appendChild(style);
 
-// ============================================
-// VALIDACIÓN DE FORMULARIO
-// ============================================
+// Validación de formulario y datos del pedido
 function validarPedido(event) {
   event.preventDefault();
   const form = event.target;
@@ -243,11 +249,10 @@ function validarPedido(event) {
   return true;
 }
 
-// ============================================
-// INICIALIZACIÓN
-// ============================================
+// Inicialización general de la página
 document.addEventListener('DOMContentLoaded', () => {
   Carrito.actualizarContador();
+  actualizarContadorFavoritos();
   initSizeSelector();
   initProductoDetalle();
   initScrollAnimations();
@@ -258,3 +263,35 @@ document.addEventListener('DOMContentLoaded', () => {
     r.addEventListener('change', renderCarrito);
   });
 });
+
+// Funciones para la lista de favoritos
+function toggleFavorito(id, nombre, precio, imagen, event) {
+    if(event) event.preventDefault();
+    const favs = JSON.parse(localStorage.getItem('voltkicks_favoritos') || '[]');
+    const index = favs.findIndex(f => f.id === id);
+    
+    if (index > -1) {
+        favs.splice(index, 1);
+        Carrito.mostrarNotificacion(`${nombre} eliminado de favoritos`);
+    } else {
+        favs.push({ id, nombre, precio, imagen });
+        Carrito.mostrarNotificacion(`${nombre} agregado a favoritos`);
+    }
+    
+    localStorage.setItem('voltkicks_favoritos', JSON.stringify(favs));
+    actualizarContadorFavoritos();
+    
+    // Si estamos en la página de favoritos, recargar para mostrar cambios
+    if (window.location.pathname.includes('favoritos.php')) {
+        window.location.reload();
+    }
+}
+
+function actualizarContadorFavoritos() {
+    const badge = document.getElementById('contador-favoritos');
+    const favs = JSON.parse(localStorage.getItem('voltkicks_favoritos') || '[]');
+    if (badge) {
+        badge.textContent = favs.length;
+        badge.style.display = favs.length > 0 ? 'flex' : 'none';
+    }
+}

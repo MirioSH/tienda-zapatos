@@ -29,12 +29,7 @@ $nombre_tienda = 'VOLTKICKS';
     <!-- Cuadro de integrantes - Esquina superior izquierda -->
     <div id="equipo-info" class="equipo-badge">
         <span class="equipo-label">EQUIPO 1</span>
-        <span class="equipo-nombres">
-            Arroyo Llanes Miguel Alejandro<br>
-            González Frías Ana Paula<br>
-            Soto Huerta Gustavo Isaac<br>
-            Trujillo Salazar Wendy Jazmin
-        </span>
+        <span class="equipo-nombres">Integrantes del Equipo</span>
     </div>
 
     <!-- Navegación Glassmórfica -->
@@ -49,25 +44,40 @@ $nombre_tienda = 'VOLTKICKS';
                 <li><a href="catalogo.php" class="nav-link <?php echo $pagina_activa === 'catalogo' ? 'activo' : ''; ?>" id="link-catalogo">CATÁLOGO</a></li>
                 <li><a href="carrito.php" class="nav-link <?php echo $pagina_activa === 'carrito' ? 'activo' : ''; ?>" id="link-carrito">CARRITO</a></li>
                 <li><a href="reportes.php" class="nav-link <?php echo $pagina_activa === 'reportes' ? 'activo' : ''; ?>" id="link-reportes">REPORTES</a></li>
-            </ul>
-            <a href="carrito.php" class="nav-cart" id="boton-carrito">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 01-8 0"></path>
-                </svg>
-                <?php
-                $total_carrito = 0;
-                if (isset($_SESSION['carrito'])) {
-                    foreach ($_SESSION['carrito'] as $item) {
-                        $total_carrito += $item['cantidad'];
-                    }
-                }
-                if ($total_carrito > 0):
-                ?>
-                <span class="cart-count" id="contador-carrito"><?php echo $total_carrito; ?></span>
+                <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <li><a href="logout.php" class="nav-link" style="color:var(--primary);">CERRAR SESIÓN</a></li>
+                <?php else: ?>
+                    <li><a href="login.php" class="nav-link <?php echo $pagina_activa === 'login' ? 'activo' : ''; ?>">INICIAR SESIÓN</a></li>
                 <?php endif; ?>
-            </a>
+            </ul>
+            <div style="display:flex; gap:20px; align-items:center;">
+                <a href="favoritos.php" class="nav-cart" id="boton-favoritos" title="Favoritos">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="cart-count" id="contador-favoritos" style="display:none; background:#ffb59e; color:#000;">0</span>
+                </a>
+                <a href="carrito.php" class="nav-cart" id="boton-carrito">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 01-8 0"></path>
+                    </svg>
+                    <?php
+                    $total_carrito = 0;
+                    if (isset($_SESSION['carrito'])) {
+                        foreach ($_SESSION['carrito'] as $item) {
+                            $total_carrito += $item['cantidad'];
+                        }
+                    }
+                    if ($total_carrito > 0):
+                    ?>
+                    <span class="cart-count" id="contador-carrito"><?php echo $total_carrito; ?></span>
+                    <?php else: ?>
+                    <span class="cart-count" id="contador-carrito" style="display:none;">0</span>
+                    <?php endif; ?>
+                </a>
+            </div>
         </div>
     </nav>
 
